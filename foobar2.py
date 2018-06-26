@@ -14,13 +14,19 @@ def answer(xs):
   return power_str
 '''
 def answer(xs):
-  xs = [x for x in xs if x != 0]
+  while 0 in xs: xs.remove(0)
   negs = [x for x in xs if x < 0]
-  if len(negs) % 2 != 0:
+  if len(negs) % 2 != 0 and len(negs) != 1:
     xs.remove(max(negs))
-  return str(reduce(lambda x,y: x*y, xs))
+  elif len(negs) % 2 != 0 and len(xs) == 1:
+    power_str = negs[0]
+  else:
+    power_int = reduce(lambda x,y: x*y, xs)
+    power_str = str(power_int)
+  return power_str
 
 print (answer(array1))
 print (answer(array2))
 print (answer(array3))	
+print (answer(array4))
 
