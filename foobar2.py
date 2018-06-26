@@ -1,19 +1,20 @@
-def answer(xs):
-  #Remove 0 values
+def answer(xs): 
+  #Remove 0 Values
   while 0 in xs: xs.remove(0)
-  #Get list of negative values
+  #If single negative number given output 0
   negs = [x for x in xs if x < 0]
-  #If length of negs is 1 and length of xs is 1, output 0
   if len(negs) == 1 and len(xs) == 1:
     power_int = 0
-  elif len(negs) % 2 != 0 and len(negs) != 1:
+  #Address odd number of negative values by removing smallest abs value  
+  if len(negs) % 2 != 0:
     xs.remove(max(negs))
-  elif len(negs) % 2 != 0 and len(negs) == 1:
-    power_int = 0
-  elif len(xs) == 0:
+  #If length of xs is 0, output 0 (Causes by array with only 0 values)
+  if len(xs) == 0:
     power_int = 0 
+  #All other cases multiply xs together to get max output
   else:
     power_int = reduce(lambda x,y: x*y, xs)
+  #Turn to int to str
   power_str = str(power_int)
   return power_str
 
