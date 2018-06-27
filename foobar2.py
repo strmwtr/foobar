@@ -1,39 +1,27 @@
 def answer(xs): 
   #Remove 0 Values
   while 0 in xs: xs.remove(0)
-  #If single negative number given output 0
+  #Create list of negative integers
   negs = [x for x in xs if x < 0]
-  if len(negs) == 1 and len(xs) == 1:
-    power_int = negs[0]
-  #Address odd number of negative values by removing smallest abs value  
-  elif len(negs) % 2 != 0:
+  #If odd num of neg vals and negs > 1,
+  #Remove smallest abs value from negs
+  if len(negs) % 2 != 0 and len(xs) != 1:
     xs.remove(max(negs))
-  #If length of xs is 0, output 0 (Causes by array with only 0 values)
+  #If xs is empty set power_int to 0
   if len(xs) == 0:
-    power_int = 0 
-  #All other cases multiply xs together to get max output
+    max_int = 0
   else:
-    power_int = reduce(lambda x,y: x*y, xs)
+    max_int = reduce(lambda x,y: x*y, xs)
   #Turn int to str
-  power_str = str(power_int)
-  return power_str
+  max_str = str(max_int)
+  return max_str
 
-def test_func():
-  a1 = [0, 0]
-  a2 = [2]
-  a3 = [0]
-  a4 = [-2]
-  a5 = [2,2]
-  a6 = [-2,2]
-  a7 = [-2,-2]
-  a8 = [-2,-2,2]
-  a9 = [-2,2,2]
-  a10 = [-1000,1000,-1000]
+listx = [[0],[1],[-1],[0,0],[1,0],[-1,0],[-1,-1]]
+for x in listx:
+  print answer(x)
 
-  arrays = [a1, a2, a3, a4, a5, a6, a7, a8, a9, a10]
-
-  for a in arrays:
-    print 'Array: {0}   ||   Output: {1}'.format(a, answer(a))
-
-test_func()
+'''
+Test 3 fails with current script, passes Test 4
+Test 4 is a single negative output and is looking for a negative result
+'''
 
