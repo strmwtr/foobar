@@ -1,52 +1,30 @@
-def answer(xs): 
-  #Remove 0 Values
+#power_hungry final answer
+def answer(xs):
+  pos = [x for x in xs if x > 0]
+  neg = [x for x in xs if x < 0]
+  zeros = [x for x in xs if x == 0]
+  if len(pos) == 0 and len(neg) == 1 and len(zeros) != 0:
+    xs = [0]
+  if len(neg) % 2 != 0 and len(neg) != 1:
+    xs.remove(max(neg))
   while 0 in xs: xs.remove(0)
-  #Create list of negative integers
-  negs = [x for x in xs if x < 0]
-  #If odd num of neg vals and negs > 1,
-  #Remove smallest abs value from negs
-  if len(negs) % 2 != 0 and len(xs) != 1:
-    xs.remove(max(negs))
-  #If xs is empty set power_int to 0
   if len(xs) == 0:
-    max_int = 0
+    power = 0
   else:
-    max_int = reduce(lambda x,y: x*y, xs)
-  #Turn int to str
-  max_str = str(max_int)
-  return max_str
+    power = reduce(lambda x,y: x*y, xs)
+  return str(power)
 
-listx = [[0],[1],[-1],[0,0],[1,0],[-1,0],[-1,-1]]
-for x in listx:
+arrays = [[0],[-1],[1],[0,1],[0,-1],[-1,-1],[1,1],[0,0]]
+for x in arrays:
   print answer(x)
 
-'''
-Test 3 fails with current script, passes Test 4
-Test 4 is a single negative output and is looking for a negative result
 
-Check against [-1, 0]. Should return 0, not -1
 
-Below currently returns bytes error, but on the right track
 
-def answer(xs): 
-  #Create list of negative integers
-  negs = [x for x in xs if x < 0]
-  #Get a count of all 0 elements
-  count_0 = len([x for x in xs if x != 0])
-  #If odd num of neg vals and negs > 1,
-  #Remove smallest abs value from negs
-  if len(negs) % 2 != 0 and len(xs) != 1:
-    xs.remove(max(negs))
-  elif len(negs) == 1 and len(count_0) != 0:
-    max_int = 0
-  else:
-    while 0 in xs: xs.remove(0)
-    if len(xs) == 0:
-      max_int = 0
-    else:
-      max_int = reduce(lambda x,y: x*y, xs)
-  #Turn int to str
-  max_str = str(max_int)
-  return max_str
-'''
+
+
+
+
+
+
 
